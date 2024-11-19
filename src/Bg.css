@@ -1,0 +1,68 @@
+@font-face {
+    font-family: Aduma;
+    src: url(./fonts/Aduma\ Regular.ttf);
+}
+
+
+.bg_cont{
+    width: 1000px;
+    height: 800px;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 135px;
+    background-color: #222A34;
+    border-radius: 20px;
+    position: relative;
+}
+
+.header_title{
+    color: white;
+    font-size: 44px;
+    text-align: right;
+    margin-top: 16px;
+    margin-right: 37px;
+    font-family: Aduma;
+}
+
+.close_icon{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.upload_btn{
+    position: absolute;
+    left: 30px;
+    background-color: #475366;
+    border: 0;
+    color: #ffffff96;
+    padding: 7px;
+    border-radius: 50px;
+    width: 131px;
+    background-image: url(./assets/Upload.png);
+    background-repeat: no-repeat;
+    background-position: 10px 8px;
+    text-align: right;
+    padding-right: 16px;
+}
+
+.upload_btn_text{
+    color: #ffffff87;
+    direction: rtl;
+    position: absolute;
+    left: 198px;
+    font-size: 12px;
+    top: 78px;
+}
+
+.middle_cont{
+    height: 630px;
+    /* border: 1px solid white; */
+}
+
+
+.footer{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
