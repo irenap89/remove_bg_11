@@ -1,0 +1,60 @@
+.no_bg_tab_cont{
+    background-color: #161B21;
+    width: 651px;
+    height: 501px;
+}
+
+.img_1{
+    width: 100%;
+    margin-top: 95px;
+}
+
+.no_bg_tab_title{
+    text-align: right;
+    padding-right: 22px;
+    padding-top: 15px;
+    font-size: 12px;
+    color: #03a9f49e;
+    background-image: url(./assets/warning.png);
+    background-repeat: no-repeat;
+    background-position: 99% 17px;
+}
+
+.no_bg_tab_header{
+    position: absolute;
+    width: 65%;
+}
+
+.select_color_btn{
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    color: #ffffff73;
+    background-color: transparent;
+    border: 1px solid #ffffff73;
+    border-radius: 50px;
+    text-align: right;
+    width: 100px;
+    height: 27px;
+    padding-right: 10px;
+    line-height: 22px;
+}
+
+.input_color{
+    position: absolute;
+    left: 28px;
+    top: 15px;
+    opacity: 0;
+}
+
+.selected_color{
+    
+    width: 20px;
+    display: block;
+    height: 25px;
+    margin-top: -23px;
+    width: 33px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    margin-left: -6px;
+}

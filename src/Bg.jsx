@@ -4,7 +4,14 @@ import close from './assets/close.png'
 import banner from './assets/banner.png'
 import logo from './assets/logo.png'
 import Download from './Download'
+import { useState } from 'react';
+import No_bg_tab from './No_bg_tab';
+
 function Bg() {
+
+    const [tab, set_tab] = useState('bg');
+    const [show_eula, set_show_eula] = useState(false);
+    
   return (
     <div className="Bg">
         <div className='bg_cont'>
@@ -27,12 +34,20 @@ function Bg() {
 
                 <div className='middle_cont_left'> 
                     <div className='tabs'>
-                          <div className='tab_no_bg selected_tab'> הוסר רקע </div>
-                          <div className='tab_original '>מקורי </div>
+                          <div className={'tab_no_bg ' + (tab=='bg'? "selected_tab": "")} onClick={()=>set_tab('bg')}> הוסר רקע </div>
+                          <div className={'tab_original ' + (tab=='original'? "selected_tab": "")}  onClick={()=>set_tab('original')}>מקורי </div>
                     </div>
 
                     <div className='middle_cont_left'>
+                        {tab=='bg' ?<No_bg_tab type="bg"></No_bg_tab>:
+                        <No_bg_tab type="original"></No_bg_tab>}
+                    </div>
 
+                    <div className='middle_cont_left_footer'> 
+                        <div className='text_eula'>
+                            על ידי העלאת תמונה, אתה מסכים לתאנים וההגבלות
+                        </div>
+                        <div className='eula' onClick={()=>set_show_eula(true)}> תקנון החברה </div>
                     </div>
                 </div>
 
@@ -46,6 +61,26 @@ function Bg() {
 
 
         </div>
+
+            {show_eula?
+            <>
+                <div className='overlay'> </div>
+                <div className='eula_popup_cont'>
+                    dfghfdgh <br/>
+                    fdhgj 
+                    ghfj 
+                    gfhj <br/>
+                    dfghfdgh <br/>
+                    fdhgj <br/>
+                    ghfj 
+                    gfhj 
+
+                </div>
+            </>: <></>
+
+                
+            }
+
     </div>
   );
 }
