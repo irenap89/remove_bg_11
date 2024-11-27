@@ -37,6 +37,7 @@
     height: 35px;
     border-radius: 50px;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .Download_small_text{

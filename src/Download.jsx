@@ -8,7 +8,7 @@ function Download(props) {
        {props.title=="Pro"? <img src={new_icon} className='new_icon'/>: <></>}
       <div className={'Download_title ' + (props.title=="Pro" ? "move_title" : "")}> {props.title}</div>
       <div className='Download_subtitle'> {props.subtitle} </div>
-      <button className='Download_btn'> {props.btn_text} </button>
+      <button className='Download_btn' onClick={()=>props.set_show_download_popup(true)}> {props.btn_text} </button>
       <div className='Download_small_text'>{props.small_text} </div>
     </div>
   );

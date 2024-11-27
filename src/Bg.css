@@ -46,6 +46,7 @@
     background-position: 10px 8px;
     text-align: right;
     padding-right: 16px;
+    cursor: pointer;
 }
 
 .upload_btn_text{
@@ -103,24 +104,26 @@
     font-size: 20px;
     background-image: url(./assets/Cleanup\ Edges.png);
     color: white;
-    font-size: 18px;
+    font-size: 23px;
     background-repeat: no-repeat;
     width: 150px;
     line-height: 56px;
     background-position: 90% 22px;
     cursor: pointer;
+    font-family: 'Aduma';
 }
 
 .tab_original{
 
     background-image: url(./assets/Image.png);
     color: white;
-    font-size: 18px;
+    font-size: 23px;
     background-repeat: no-repeat;
     width: 150px;
     line-height: 56px;
     background-position: 90% 22px;
     cursor: pointer;
+    font-family: 'Aduma';
 }
 
 .selected_tab{
@@ -144,6 +147,7 @@
     font-size: 12px;
     margin-top: -19px;
     margin-left: -15px;
+    cursor: pointer;
 }
 
 .text_eula{
@@ -175,4 +179,115 @@
     position: absolute;
     background-color: #060606cf;
   
+}
+
+.close_1{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.eula_popup_text{
+    margin-top: 50px;
+}
+
+.download_popup_cont {
+    width: 800px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+}
+
+.top_img{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    position: absolute;
+    top: -34px;
+    background-color: white;
+    left: 44%;
+    box-shadow: 1px 1px 10px #673ab75e;
+    background-repeat: no-repeat;
+    background-position: 8px;
+    background-size: 74%;
+    background-image: url(./assets/Downloads\ Folder.png);
+}
+
+.download_popup_title{
+    font-size: 52px;
+    font-family: Aduma;
+    color: #033774;
+    margin-top: 52px;
+}
+
+.download_popup_subtitle{
+    font-size: 20px;
+    color: #033774;
+    margin-top: 20px;
+}
+
+.not_robot_text{
+    color: #033774;
+}
+
+.checkbox_cont{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 50px;
+    margin-right: 125px;
+}
+
+.not_robot_text{
+    color: #033774;
+    width: 140px;
+    text-align: right;
+}
+
+.not_robot_img{
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+}
+
+.btn_popup_cancel{
+    color: #033774;
+    border: 1px solid #033774;
+    background-color: transparent;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    font-family: 'ADUMA';
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn_popup_approve{
+    color: #033774;
+    border: 0;
+    width: 184px;
+    height: 40px;
+    border-radius: 50px;
+    font-family: 'ADUMA';
+    font-size: 20px;
+    background: linear-gradient(57deg, #9c27b0a3, #03A9F4);
+    color: white;
+    cursor: pointer;
+}
+
+.btn_popup_cont{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-top: 55px;
+    gap: 20px;
+}
+
+.file_input{
+    display: none;
 }
