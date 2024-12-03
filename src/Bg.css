@@ -291,3 +291,11 @@
 .file_input{
     display: none;
 }
+
+.err_msg{
+    color: red;
+    font-size: 11px;
+    position: absolute;
+    left: 62px;
+    top: 96px;
+}

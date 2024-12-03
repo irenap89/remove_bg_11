@@ -13,7 +13,7 @@ function No_bg_tab(props) {
       inputElement.current.click();
     };
 
-    console.log(selected_col);
+
     
 
   return (

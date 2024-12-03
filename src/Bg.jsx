@@ -8,7 +8,7 @@ import { useState,useRef } from 'react';
 import No_bg_tab from './No_bg_tab';
 import close_1 from './assets/close1.png'
 import not_robot from './assets/not_robot.png'
-
+import axios from 'axios';
 
 function Bg() {
 
@@ -16,11 +16,47 @@ function Bg() {
     const [show_eula, set_show_eula] = useState(false);
     const [show_download_popup, set_show_download_popup] = useState(false);
   
+    const [err_msg, set_err_msg] = useState('');
+
     const inputElement = useRef();
 
     const focusInput = () => {
       inputElement.current.click();
     };
+
+    function send_img_to_server(img_obj){
+
+        if ((img_obj.files[0].type == "image/png" || img_obj.files[0].type == "image/jpg" || img_obj.files[0].type == "image/jpeg") 
+                && img_obj.files[0].size<1000000) {
+
+            let req_url="http://localhost:4000/upload_img"
+
+            let formData = new FormData();
+            formData.append('file_img', img_obj.files[0]);
+            // formData.append('color','red');
+        
+            axios({
+                method: "post",
+                url: req_url,
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then(function (response) {
+                //handle success
+                debugger;
+
+                console.log('res:'+ response.data);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+
+        } else {
+            set_err_msg('פורמט לא נתמך');
+        }
+
+    }
 
   return (
     <div className="Bg">
@@ -31,7 +67,10 @@ function Bg() {
                 <button className='upload_btn' onClick={focusInput}> העלאת תמונה </button>
                 <div className='upload_btn_text'> פורמטים נתמכים  png, jpg</div>
 
-                <input type="file" ref={inputElement} className='file_input'/>
+                {err_msg?<div className='err_msg'> {err_msg} </div>: ''}
+
+
+                <input type="file" ref={inputElement} className='file_input' onChange={(e)=>send_img_to_server(e.target)}/>
             </div>
 
             <div className='middle_cont'>
