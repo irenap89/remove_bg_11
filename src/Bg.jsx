@@ -17,6 +17,7 @@ function Bg() {
     const [show_download_popup, set_show_download_popup] = useState(false);
   
     const [err_msg, set_err_msg] = useState('');
+    const [file_name, set_file_name] = useState('');
 
     const inputElement = useRef();
 
@@ -44,8 +45,13 @@ function Bg() {
             .then(function (response) {
                 //handle success
                 debugger;
+                if (response.data.success==false ){
+                    set_err_msg('פורמט לא נתמך');
+                } else {
+                    set_file_name(response.data.file_name);
+                }
 
-                console.log('res:'+ response.data);
+               
             })
             .catch(function (response) {
                 //handle error
@@ -90,8 +96,8 @@ function Bg() {
                     </div>
 
                     <div className='middle_cont_left'>
-                        {tab=='bg' ?<No_bg_tab type="bg"></No_bg_tab>:
-                        <No_bg_tab type="original"></No_bg_tab>}
+                        {tab=='bg' ?<No_bg_tab type="bg" file_name={file_name}></No_bg_tab>:
+                        <No_bg_tab type="original" file_name={file_name}></No_bg_tab>}
                     </div>
 
                     <div className='middle_cont_left_footer'> 

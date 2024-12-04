@@ -6,6 +6,8 @@ import { useRef , useState } from "react";
 function No_bg_tab(props) {
 
     const [selected_col, setselected_col] = useState();
+    const [show_loader, setshow_loader] = useState(false);
+
 
     const inputElement = useRef();
 
@@ -28,7 +30,21 @@ function No_bg_tab(props) {
                 <input type="color" ref={inputElement} className='input_color' value={selected_col} onChange={(e)=>setselected_col(e.target.value)}/>    
             </div> : <></>}
 
-          <img src={img_1} className='img_1'/>  
+        {props.file_name?<>
+
+          { props.type =='bg'?
+          <img src={'http://localhost:4000/no_bg_'+props.file_name} className='img_1'/>  :
+          <img src={'http://localhost:4000/'+props.file_name} className='img_1'/>}
+
+        </>: ''}
+
+        {show_loader==false && !props.file_name? <div className='start_upload_img'> יש להעלות תמונה</div>: ''}
+
+        {show_loader? <div className='loader_cont'>
+              <div className='loader_cont_in'>
+                  39%
+              </div>
+        </div>: ''}
 
     </div>
   );
