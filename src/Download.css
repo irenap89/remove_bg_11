@@ -62,3 +62,11 @@
 .move_title{
     margin-right: 70px;
 }
+
+.err_msg_download {
+    color: red;
+    font-size: 11px;
+    position: absolute;
+    left: 128px;
+    top: 216px;
+}

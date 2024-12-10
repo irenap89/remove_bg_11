@@ -299,3 +299,11 @@
     left: 62px;
     top: 96px;
 }
+
+.err_msg_not_robot {
+    color: red;
+    font-size: 11px;
+    position: absolute;
+    left: 44%;
+    top: 89%;
+}

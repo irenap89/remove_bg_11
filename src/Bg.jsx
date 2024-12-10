@@ -7,7 +7,7 @@ import Download from './Download'
 import { useState,useRef } from 'react';
 import No_bg_tab from './No_bg_tab';
 import close_1 from './assets/close1.png'
-import not_robot from './assets/not_robot.png'
+import not_robot_img from './assets/not_robot.png'
 import axios from 'axios';
 
 function Bg() {
@@ -18,6 +18,12 @@ function Bg() {
   
     const [err_msg, set_err_msg] = useState('');
     const [file_name, set_file_name] = useState('');
+    const [color, set_color] = useState('');
+    const [show_loader, set_show_loader] = useState(false);
+    const [not_robot, set_not_robot] = useState(false);
+    const [err_msg_down, set_err_msg_down] = useState('');
+    
+
 
     const inputElement = useRef();
 
@@ -25,16 +31,22 @@ function Bg() {
       inputElement.current.click();
     };
 
+    function set_color_val(val){
+        set_color(val);
+    }
+
     function send_img_to_server(img_obj){
 
         if ((img_obj.files[0].type == "image/png" || img_obj.files[0].type == "image/jpg" || img_obj.files[0].type == "image/jpeg") 
                 && img_obj.files[0].size<1000000) {
 
+            set_show_loader(true);
+
             let req_url="http://localhost:4000/upload_img"
 
             let formData = new FormData();
             formData.append('file_img', img_obj.files[0]);
-            // formData.append('color','red');
+            formData.append('color',color);
         
             axios({
                 method: "post",
@@ -43,18 +55,17 @@ function Bg() {
                 headers: { "Content-Type": "multipart/form-data" },
             })
             .then(function (response) {
-                //handle success
-                debugger;
+         
                 if (response.data.success==false ){
                     set_err_msg('פורמט לא נתמך');
                 } else {
+                    set_show_loader(false);
                     set_file_name(response.data.file_name);
                 }
 
                
             })
             .catch(function (response) {
-                //handle error
                 console.log(response);
             });
 
@@ -62,6 +73,18 @@ function Bg() {
             set_err_msg('פורמט לא נתמך');
         }
 
+    }
+
+
+    function download_img_func(){
+        if (not_robot){
+          //  TODO: download image
+        
+                
+
+        } else {
+            set_err_msg_down('יש לסמן אני לא רובוט');
+        }
     }
 
   return (
@@ -82,8 +105,8 @@ function Bg() {
             <div className='middle_cont'>
                 <div className='middle_cont_right'> 
                     <div className='download_cont'>
-                        <Download set_show_download_popup={set_show_download_popup} title="תמונה חינם" subtitle="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 מגה פיקסל"></Download>
-                        <Download set_show_download_popup={set_show_download_popup} title="Pro" subtitle="תמונה מלאה"  btn_text="HD הורד"  small_text="האיכות הטובה ביותר עד 25 מגה פיקסל"></Download>
+                        <Download set_show_download_popup={set_show_download_popup} file_name={file_name} title="תמונה חינם" subtitle="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 מגה פיקסל"></Download>
+                        <Download set_show_download_popup={set_show_download_popup} file_name={file_name} title="Pro" subtitle="תמונה מלאה"  btn_text="HD הורד"  small_text="האיכות הטובה ביותר עד 25 מגה פיקסל"></Download>
                     </div>
 
                 </div>
@@ -96,8 +119,8 @@ function Bg() {
                     </div>
 
                     <div className='middle_cont_left'>
-                        {tab=='bg' ?<No_bg_tab type="bg" file_name={file_name}></No_bg_tab>:
-                        <No_bg_tab type="original" file_name={file_name}></No_bg_tab>}
+                        {tab=='bg' ?<No_bg_tab type="bg" file_name={file_name} set_color_val={set_color_val} show_loader={show_loader}></No_bg_tab>:
+                        <No_bg_tab type="original" file_name={file_name} set_color_val={set_color_val} show_loader={show_loader}></No_bg_tab>}
                     </div>
 
                     <div className='middle_cont_left_footer'> 
@@ -158,18 +181,19 @@ function Bg() {
                     </div>
 
                     <div className='checkbox_cont'>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={()=>set_not_robot(!not_robot)}/>
                         <div className='not_robot_text'> אני לא רובוט </div>
-                        <img src={not_robot}  className='not_robot_img'/>
+                        <img src={not_robot_img}  className='not_robot_img'/>
 
                     </div>
 
 
                     <div className='btn_popup_cont'>
                         <button className='btn_popup_cancel' onClick={()=>set_show_download_popup(false)}>ביטול</button>
-                        <button className='btn_popup_approve'>אישור</button>
+                        <button className='btn_popup_approve' onClick={()=> download_img_func()}>אישור</button>
                     </div>
 
+                    {err_msg_down?<div className='err_msg_not_robot'> {err_msg_down} </div>: ''}
                 </div>
             </>: <></>   
             }

@@ -20,6 +20,8 @@ app.get('/test', (req, res) => {
 
 app.post('/upload_img', (req, res) => {
 
+    let color= req.body.color;
+  
     let file_img=req.files.file_img;
 
     let uniq_time = new Date();
@@ -38,7 +40,7 @@ app.post('/upload_img', (req, res) => {
             }else{
               const inputPath = file_path;
               const fileBlob = await fs.openAsBlob(inputPath)
-              const rbgResultData = await removeBg(fileBlob);
+              const rbgResultData = await removeBg(fileBlob, color);
               fs.writeFileSync(__dirname + '/no_bg_images/'+"no_bg_"+file_name, Buffer.from(rbgResultData));
 
               res.send({
@@ -56,10 +58,12 @@ app.post('/upload_img', (req, res) => {
 })
 
 
-async function removeBg(blob) {
+async function removeBg(blob,color) {
   const formData = new FormData();
   formData.append("size", "auto");
   formData.append("image_file", blob);
+  formData.append("bg_color", color);
+
 
   const response = await fetch("https://api.remove.bg/v1.0/removebg", {
     method: "POST",
