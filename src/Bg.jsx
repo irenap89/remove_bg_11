@@ -4,7 +4,7 @@ import close from './assets/close.png'
 import banner from './assets/banner.png'
 import logo from './assets/logo.png'
 import Download from './Download'
-import { useState,useRef } from 'react';
+import { useState,useRef ,useEffect} from 'react';
 import No_bg_tab from './No_bg_tab';
 import close_1 from './assets/close1.png'
 import not_robot_img from './assets/not_robot.png'
@@ -23,7 +23,14 @@ function Bg() {
     const [not_robot, set_not_robot] = useState(false);
     const [err_msg_down, set_err_msg_down] = useState('');
     
-
+    
+    useEffect(() => {
+        if (not_robot){
+            set_err_msg_down('');
+        }
+        
+     }, [not_robot]);
+  
 
     const inputElement = useRef();
 
@@ -78,8 +85,19 @@ function Bg() {
 
     function download_img_func(){
         if (not_robot){
-          //  TODO: download image
-        
+         
+      
+          fetch('http://localhost:4000/no_bg_'+file_name)
+          .then(response => {
+              response.blob().then(blob => {
+                  let url = window.URL.createObjectURL(blob);
+                  let a = document.createElement('a');
+                  a.href = url;
+                  a.download = file_name;
+                  a.click();
+              });
+             
+           });
                 
 
         } else {
@@ -89,6 +107,9 @@ function Bg() {
 
   return (
     <div className="Bg">
+
+    
+
         <div className='bg_cont'>
             <div className='header'> 
                 <div className='header_title'> העלה תמונה כדי להסיר את הרקע </div>
@@ -125,7 +146,8 @@ function Bg() {
 
                     <div className='middle_cont_left_footer'> 
                         <div className='text_eula'>
-                            על ידי העלאת תמונה, אתה מסכים לתאנים וההגבלות
+                         על ידי העלאת תמונה, אתה מסכים לתאנים וההגבלות
+                      שלנו. אתר זה מוגן על ידי וחלים מדיניות ופרטיות ותנאי השימוש
                         </div>
                         <div className='eula' onClick={()=>set_show_eula(true)}> תקנון החברה </div>
                     </div>
@@ -135,8 +157,8 @@ function Bg() {
 
 
             <div className='footer'>
-                    <img src={banner} /> 
-                    <img src={logo} /> 
+                    <img src={banner} className='banner'/> 
+                    <img src={logo} className='logo'/> 
             </div>
 
 
@@ -181,7 +203,7 @@ function Bg() {
                     </div>
 
                     <div className='checkbox_cont'>
-                        <input type="checkbox" onChange={()=>set_not_robot(!not_robot)}/>
+                        <input type="checkbox" checked={not_robot} onChange={()=>set_not_robot(!not_robot)}/>
                         <div className='not_robot_text'> אני לא רובוט </div>
                         <img src={not_robot_img}  className='not_robot_img'/>
 

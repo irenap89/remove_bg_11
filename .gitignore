@@ -11,6 +11,9 @@
 # production
 /build
 
+/back/no_bg_images
+/back/upload_images
+
 # misc
 .DS_Store
 .env.local
